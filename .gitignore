@@ -1,0 +1,52 @@
+# =============================================================================
+# .GITIGNORE - LLM API + N8N + REDIS PROJECT
+# =============================================================================
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.venv/
+venv/
+env/
+ENV/
+
+# Models (podem ser muito grandes - principal causa do problema)
+models/
+*.gguf
+*.bin
+*.safetensors
+*.model
+
+# Docker volumes
+ollama_data/
+redis_data/
+n8n_data/
+
+# Logs
+*.log
+logs/
+
+# Cache
+.cache/
+*.cache
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.local
+
+# Temporary
+tmp/
+temp/
+*.tmp
