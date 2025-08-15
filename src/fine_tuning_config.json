@@ -1,0 +1,8 @@
+{
+  "fine_tuned_model": {
+    "enabled": true,
+    "model_path": "src\\current_fine_tuned_model.pkl",
+    "original_file": "models\\fine_tuned_model_20250801_160218.pkl",
+    "integrated_at": 1754074938.9777696
+  }
+}
