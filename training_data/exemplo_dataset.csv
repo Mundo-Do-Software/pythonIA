@@ -1,0 +1,3 @@
+input,output,categoria
+Como configurar SSL?,"Para SSL: 1) Obtenha certificado, 2) Configure servidor, 3) Teste conexão HTTPS",seguranca
+Backup automático funciona?,"Sim, backup automático roda diariamente às 2h. Verifique logs em /var/log/backup.log",backup

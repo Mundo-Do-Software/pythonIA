@@ -1,0 +1,86 @@
+# =============================================================================
+# .DOCKERIGNORE - LLM API + N8N + REDIS PROJECT
+# =============================================================================
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+docs/
+*.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Virtual Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Large Model Files (will be mounted as volumes)
+models/
+loras/
+ollama_data/
+redis_data/
+n8n_data/
+
+# Test Files
+tests/
+test_*
+run_tests.py
+
+# Scripts (not needed in container)
+scripts/
+
+# Docker Files (avoid recursion)
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Logs
+*.log
+logs/
+
+# Temporary
+*.tmp
+*.temp
+.cache/
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backup files
+*.backup
+*.bak
+*.orig
+
+# Node modules (if any)
+node_modules/
+
+# Environment backups
+config/.env.backup
+.env.local
+.env.production
+
+# Workflow configs (will be mounted)
+workflows/
+
+# Development tools
+.coverage
+htmlcov/

@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "domain": "saude_digital",
+    "created_at": "2025-08-01T15:43:02.243457",
+    "total_examples": 5,
+    "format_version": "1.0"
+  },
+  "conversations": [
+    {
+      "input": "Tell me about telemedicina",
+      "output": "About telemedicina: [General information]",
+      "domain": "saude_digital",
+      "template": "general"
+    },
+    {
+      "input": "Tell me about prescrição digital",
+      "output": "About prescrição digital: [General information]",
+      "domain": "saude_digital",
+      "template": "general"
+    },
+    {
+      "input": "Tell me about agendamento online",
+      "output": "About agendamento online: [General information]",
+      "domain": "saude_digital",
+      "template": "general"
+    },
+    {
+      "input": "Tell me about prontuário eletrônico",
+      "output": "About prontuário eletrônico: [General information]",
+      "domain": "saude_digital",
+      "template": "general"
+    },
+    {
+      "input": "Tell me about consulta virtual",
+      "output": "About consulta virtual: [General information]",
+      "domain": "saude_digital",
+      "template": "general"
+    }
+  ]
+}

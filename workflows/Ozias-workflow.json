@@ -1,0 +1,108 @@
+{
+    "name": "Workflow Jira Ozias",
+    "nodes": [
+      {
+        "id": "manual-trigger",
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "position": [250, 300]
+      },
+      {
+        "id": "set-task-id",
+        "name": "Set Task Id",
+        "type": "n8n-nodes-base.set",
+        "position": [400, 300],
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "name": "taskId",
+                "type": "string",
+                "value": "NEX-19"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "get-issue",
+        "name": "Get Issue by Key",
+        "type": "n8n-nodes-base.jira",
+        "position": [600, 300],
+        "parameters": {
+          "resource": "issue",
+          "operation": "get",
+          "issueKey": "={{ $json.taskId }}"
+        },
+        "credentials": {
+          "jiraSoftwareCloudApi": {
+            "id": "YOUR_JIRA_CREDENTIAL_ID",
+            "name": "Jira SW Cloud account"
+          }
+        }
+      },
+      {
+        "id": "chat-model",
+        "name": "OpenAI Chat Model",
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "position": [750, 140],
+        "parameters": {
+          "model": "gpt-4o-mini",
+          "options": {}
+        },
+        "credentials": {
+          "openAiApi": {
+            "id": "YOUR_OPENAI_CREDENTIAL_ID",
+            "name": "OpenAi account"
+          }
+        }
+      },
+      {
+        "id": "ozias-agent",
+        "name": "Ozias - Analyze Task",
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "position": [900, 300],
+        "parameters": {
+          "text": "=Task: {{$json.fields.summary}}\n\nDescription: {{$json.fields.description}}\n\nReporter: {{$json.fields.reporter.displayName}}",
+          "hasOutputParser": true
+        },
+        "credentials": {
+          "openAiApi": {
+            "id": "YOUR_OPENAI_CREDENTIAL_ID",
+            "name": "OpenAi account"
+          }
+        }
+      },
+      {
+        "id": "structured-output",
+        "name": "Structured Output Parser",
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "position": [1080, 300],
+        "parameters": {
+          "schemaType": "manual",
+          "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"summary\": { \"type\": \"string\" },\n    \"recommendation\": { \"type\": \"string\" }\n  }\n}"
+        }
+      }
+    ],
+    "connections": {
+      "manual-trigger": {
+        "main": [[{ "node": "set-task-id", "type": "main", "index": 0 }]]
+      },
+      "set-task-id": {
+        "main": [[{ "node": "get-issue", "type": "main", "index": 0 }]]
+      },
+      "get-issue": {
+        "main": [[{ "node": "ozias-agent", "type": "main", "index": 0 }]]
+      },
+      "chat-model": {
+        "ai_languageModel": [[{ "node": "ozias-agent", "type": "ai_languageModel", "index": 0 }]]
+      },
+      "ozias-agent": {
+        "main": [[{ "node": "structured-output", "type": "main", "index": 0 }]]
+      }
+    },
+    "active": false,
+    "settings": {},
+    "versionId": "ozias-jira-flow-v1"
+  }
+  

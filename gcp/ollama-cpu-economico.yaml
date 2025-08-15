@@ -1,0 +1,128 @@
+# Deployment CPU-otimizado para economia máxima
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama-cpu-economico
+  labels:
+    app: ollama-cpu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama-cpu
+  template:
+    metadata:
+      labels:
+        app: ollama-cpu
+    spec:
+      containers:
+      - name: ollama-cpu
+        image: ollama/ollama:latest
+        ports:
+        - containerPort: 11434
+        env:
+        - name: OLLAMA_HOST
+          value: "0.0.0.0"
+        - name: OLLAMA_NUM_PARALLEL
+          value: "1"
+        - name: OLLAMA_MAX_LOADED_MODELS
+          value: "1"
+        - name: OLLAMA_CONTEXT_LENGTH
+          value: "1024"  # Contexto muito reduzido para economia
+        - name: OLLAMA_MAX_QUEUE
+          value: "128"
+        # Otimizações CPU
+        - name: OMP_NUM_THREADS
+          value: "2"
+        - name: MALLOC_ARENA_MAX
+          value: "2"
+        resources:
+          requests:
+            memory: "2Gi"    # Muito econômico
+            cpu: "1"         # Apenas 1 CPU
+          limits:
+            memory: "4Gi"    # Limite baixo
+            cpu: "2"         # Máximo 2 CPUs
+        volumeMounts:
+        - name: ollama-models
+          mountPath: /root/.ollama
+        readinessProbe:
+          httpGet:
+            path: /api/tags
+            port: 11434
+          initialDelaySeconds: 15
+          periodSeconds: 30
+        livenessProbe:
+          httpGet:
+            path: /api/tags
+            port: 11434
+          initialDelaySeconds: 30
+          periodSeconds: 60
+      volumes:
+      - name: ollama-models
+        persistentVolumeClaim:
+          claimName: ollama-models-cpu-pvc
+      # 🎯 ECONOMIA MÁXIMA: Usar apenas nós spot/preemptible
+      nodeSelector:
+        cloud.google.com/gke-preemptible: "true"
+      tolerations:
+      - key: "cloud.google.com/gke-preemptible"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ollama-cpu-service
+spec:
+  selector:
+    app: ollama-cpu
+  ports:
+  - protocol: TCP
+    port: 11434
+    targetPort: 11434
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ollama-models-cpu-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 15Gi  # Apenas para DeepSeek 1.3B
+  storageClassName: standard  # Mais barato que SSD
+---
+# HPA para auto-scaling econômico
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ollama-cpu-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ollama-cpu-economico
+  minReplicas: 0  # 🎯 ECONOMIA: Pode escalar para zero quando não há uso
+  maxReplicas: 2  # Máximo 2 réplicas
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 60  # Scale up aos 60% CPU
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 70  # Scale up aos 70% memória
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300  # Aguardar 5 min antes de scale down
+    scaleUp:
+      stabilizationWindowSeconds: 60   # Scale up rápido

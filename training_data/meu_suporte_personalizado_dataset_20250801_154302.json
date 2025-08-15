@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "domain": "meu_suporte_personalizado",
+    "created_at": "2025-08-01T15:43:02.281165",
+    "total_examples": 3,
+    "format_version": "1.0"
+  },
+  "conversations": [
+    {
+      "input": "O sistema está lento, o que fazer?",
+      "output": "Para resolver lentidão: 1) Verifique conexão internet, 2) Feche abas/programas desnecessários, 3) Limpe cache do navegador, 4) Reinicie o sistema, 5) Se persistir, entre em contato informando: SO, navegador, e passos reproduzir o problema."
+    },
+    {
+      "input": "Como fazer backup dos meus dados?",
+      "output": "Para backup seguro: 1) Acesse Configurações > Backup, 2) Selecione dados para salvar, 3) Escolha local (nuvem/local), 4) Configure frequência automática, 5) Teste restauração mensalmente. Recomendamos backup diário automático para nuvem."
+    },
+    {
+      "input": "Posso integrar com outras ferramentas?",
+      "output": "Sim! Oferecemos integrações com: Slack, Teams, Zapier, Google Workspace, Office 365. Acesse Integrações no menu, escolha a ferramenta, siga o wizard de configuração. Para integrações personalizadas, consulte nossa API em docs.empresa.com/api."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "domain": "suporte_tecnico",
+    "created_at": "2025-08-01T16:00:06.367200",
+    "total_examples": 5,
+    "format_version": "1.0"
+  },
+  "conversations": [
+    {
+      "input": "A API está retornando erro 500",
+      "output": "Para resolver erro 500: 1) Verifique os logs do servidor em /var/log/, 2) Confirme se o banco de dados está conectado, 3) Teste a conexão Redis com 'redis-cli ping', 4) Reinicie os serviços com 'docker-compose restart', 5) Se persistir, verifique memória RAM disponível."
+    },
+    {
+      "input": "Como configurar SSL no Docker?",
+      "output": "Para SSL no Docker: 1) Obtenha certificados (Let's Encrypt gratuito), 2) Monte volumes dos certificados no container, 3) Configure nginx/apache para SSL, 4) Redirecione HTTP para HTTPS, 5) Teste com 'curl -I https://seudominio.com'. Exemplo: 'docker run -v /etc/ssl:/ssl nginx'."
+    },
+    {
+      "input": "O Redis não está conectando",
+      "output": "Para debug Redis: 1) Verifique se está rodando 'docker ps | grep redis', 2) Teste conexão 'redis-cli -h localhost -p 6379 ping', 3) Confirme firewall/porta liberada, 4) Verifique logs 'docker logs redis-container', 5) Reinicie se necessário 'docker restart redis'."
+    },
+    {
+      "input": "Como otimizar performance da API?",
+      "output": "Para otimizar API: 1) Implemente cache Redis/Memcached, 2) Use connection pooling no banco, 3) Otimize queries SQL (índices), 4) Configure load balancer, 5) Use CDN para assets, 6) Monitore com APM (New Relic/DataDog), 7) Considere cache semântico para LLMs."
+    },
+    {
+      "input": "Backup automático não funciona",
+      "output": "Para backup automático: 1) Verifique cron job 'crontab -l', 2) Confirme permissões de escrita no destino, 3) Teste script manualmente, 4) Verifique espaço em disco 'df -h', 5) Configure logs do backup, 6) Use ferramentas como rsync ou duplicati. Exemplo: '0 2 * * * /scripts/backup.sh'."
+    }
+  ]
+}

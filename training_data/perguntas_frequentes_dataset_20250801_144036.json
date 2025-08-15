@@ -1,0 +1,20 @@
+{
+  "metadata": {
+    "domain": "perguntas_frequentes",
+    "created_at": "2025-08-01T14:40:36.396074",
+    "total_examples": 2,
+    "format_version": "1.0"
+  },
+  "conversations": [
+    {
+      "input": "Como funciona a IA no nosso sistema?",
+      "output": "Nossa IA usa modelos de linguagem avançados para entender contexto e gerar respostas precisas. Combinamos cache semântico para velocidade com fine-tuning contínuo para melhorar a qualidade das respostas baseada no uso real.",
+      "context": "Sistema de IA empresarial"
+    },
+    {
+      "input": "Quais são os benefícios do cache semântico?",
+      "output": "O cache semântico oferece: 1) Velocidade 800x+ maior, 2) Redução de custos computacionais, 3) Respostas consistentes para perguntas similares, 4) Melhoria contínua da experiência do usuário.",
+      "context": "Performance e otimização"
+    }
+  ]
+}

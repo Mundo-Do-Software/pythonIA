@@ -1,0 +1,11 @@
+{
+    "model": "deepseek-coder:1.3b",
+    "messages": [
+        {
+            "role": "user", 
+            "content": "Diga apenas: Olá! Sistema funcionando!"
+        }
+    ],
+    "max_tokens": 50,
+    "temperature": 0.7
+}

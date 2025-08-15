@@ -1,0 +1,84 @@
+{
+  "export_timestamp": "2025-08-01T15:00:20.956598",
+  "original_model_file": "fine_tuned_model_20250801_145023.pkl",
+  "model_size_bytes": 22731,
+  "training_summary": {
+    "status": "trained",
+    "total_examples": 25,
+    "domains": {
+      "meu_dataset_completo": {
+        "examples": 10,
+        "features": [
+          "app",
+          "automático",
+          "automático funciona",
+          "backup",
+          "backup automático",
+          "backup dos",
+          "benefícios",
+          "benefícios do",
+          "cache",
+          "cache semântico"
+        ]
+      },
+      "meu_negocio_tech": {
+        "examples": 3,
+        "features": [
+          "app",
+          "como",
+          "como precificar",
+          "consultoria",
+          "consultoria em",
+          "custos",
+          "custos de",
+          "de",
+          "de consultoria",
+          "de desenvolvimento"
+        ]
+      },
+      "meu_suporte_personalizado": {
+        "examples": 3,
+        "features": [
+          "backup",
+          "backup dos",
+          "com",
+          "com outras",
+          "como",
+          "como fazer",
+          "dados",
+          "dos",
+          "dos meus",
+          "está"
+        ]
+      },
+      "saude_digital": {
+        "examples": 5,
+        "features": [
+          "about",
+          "about agendamento",
+          "about consulta",
+          "about prescrição",
+          "about prontuário",
+          "about telemedicina",
+          "agendamento",
+          "agendamento online",
+          "consulta",
+          "consulta virtual"
+        ]
+      }
+    },
+    "training_timestamp": "2025-08-01T15:00:20.955598"
+  },
+  "usage_instructions": {
+    "python_load": "joblib.load('model.joblib') ou pickle.load(open('model.pkl', 'rb'))",
+    "prediction": "tuner.predict('sua pergunta', top_k=3)",
+    "dependencies": [
+      "scikit-learn",
+      "numpy",
+      "pickle"
+    ]
+  },
+  "integration_example": {
+    "basic_usage": "from scripts.real_fine_tuning import SimplifiedFineTuner\ntuner = SimplifiedFineTuner()\ntuner.load_model('exported_model.pkl')\nresults = tuner.predict('Como posso ajudar?')\nprint(results[0]['response'])"
+  }
+}

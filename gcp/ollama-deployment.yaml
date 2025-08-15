@@ -1,0 +1,98 @@
+# Configuração do Kubernetes para Ollama no Google Cloud
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama-deepseek
+  labels:
+    app: ollama
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama
+  template:
+    metadata:
+      labels:
+        app: ollama
+    spec:
+      containers:
+      - name: ollama
+        image: ollama/ollama:latest
+        ports:
+        - containerPort: 11434
+        env:
+        - name: OLLAMA_HOST
+          value: "0.0.0.0"
+        - name: OLLAMA_GPU_LAYERS
+          value: "999"
+        - name: OLLAMA_NUM_PARALLEL
+          value: "1"  # 🎯 ECONOMIA: Reduzido para 1 (era 2)
+        - name: OLLAMA_MAX_LOADED_MODELS
+          value: "1"  # 🎯 ECONOMIA: Apenas 1 modelo por vez (era 2)
+        - name: OLLAMA_FLASH_ATTENTION
+          value: "1"
+        - name: OLLAMA_CONTEXT_LENGTH
+          value: "2048"  # 🎯 ECONOMIA: Reduzido de 4096 para 2048
+        - name: OLLAMA_MAX_QUEUE
+          value: "256"   # 🎯 ECONOMIA: Reduzido de 512 para 256
+        resources:
+          requests:
+            memory: "4Gi"   # 🎯 ECONOMIA: Reduzido de 8Gi para 4Gi
+            cpu: "2"        # 🎯 ECONOMIA: Reduzido de 4 para 2
+            nvidia.com/gpu: 1
+          limits:
+            memory: "8Gi"   # 🎯 ECONOMIA: Reduzido de 16Gi para 8Gi
+            cpu: "4"        # 🎯 ECONOMIA: Reduzido de 8 para 4
+            nvidia.com/gpu: 1
+        volumeMounts:
+        - name: ollama-models
+          mountPath: /root/.ollama
+        readinessProbe:
+          httpGet:
+            path: /api/tags
+            port: 11434
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /api/tags
+            port: 11434
+          initialDelaySeconds: 60
+          periodSeconds: 30
+      volumes:
+      - name: ollama-models
+        persistentVolumeClaim:
+          claimName: ollama-models-pvc
+      nodeSelector:
+        cloud.google.com/gke-accelerator: nvidia-tesla-t4  # ou nvidia-l4
+        cloud.google.com/gke-preemptible: "true"           # 🎯 SPOT INSTANCES (70% economia)
+      tolerations:
+      - key: "cloud.google.com/gke-preemptible"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ollama-service
+spec:
+  selector:
+    app: ollama
+  ports:
+  - protocol: TCP
+    port: 11434
+    targetPort: 11434
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ollama-models-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 30Gi  # 🎯 ECONOMIA: Reduzido de 50Gi para 30Gi
+  storageClassName: standard  # 🎯 ECONOMIA: Mudou de ssd para standard

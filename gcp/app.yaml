@@ -1,0 +1,53 @@
+# Google App Engine configuration for LLM API
+runtime: python39
+service: llm-api
+instance_class: F4_1G
+
+# Configurações de auto-scaling
+automatic_scaling:
+  min_instances: 1
+  max_instances: 10
+  target_cpu_utilization: 0.6
+  target_throughput_utilization: 0.6
+
+# Variáveis de ambiente
+env_variables:
+  API_KEY: "your-secure-api-key-here"
+  REDIS_URL: "redis://10.0.0.1:6379"  # Será configurado com Memorystore
+  CACHE_TTL: "300"
+  OLLAMA_URL: "http://ollama-service:11434"  # Será configurado com GKE
+  ENVIRONMENT: "production"
+
+# Configuração de recursos
+resources:
+  cpu: 2
+  memory_gb: 4
+  disk_size_gb: 20
+
+# Health check
+readiness_check:
+  path: "/"
+  check_interval_sec: 5
+  timeout_sec: 4
+  failure_threshold: 2
+  success_threshold: 2
+
+liveness_check:
+  path: "/"
+  check_interval_sec: 30
+  timeout_sec: 4
+  failure_threshold: 4
+  success_threshold: 2
+
+# Configuração de rede
+network:
+  forwarded_ports:
+    - 5000
+
+# Handlers para servir arquivos estáticos (se necessário)
+handlers:
+- url: /static
+  static_dir: static
+  
+- url: /.*
+  script: auto

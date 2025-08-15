@@ -1,0 +1,144 @@
+{
+  "export_timestamp": "2025-08-01T16:03:28.385883",
+  "original_model_file": "fine_tuned_model_20250801_160218.pkl",
+  "model_size_bytes": 49096,
+  "training_summary": {
+    "status": "trained",
+    "total_examples": 65,
+    "domains": {
+      "ecommerce_suporte": {
+        "examples": 10,
+        "features": [
+          "acompanhar",
+          "acompanhar meu",
+          "alterar",
+          "alterar endereço",
+          "cancelar",
+          "cancelar meu",
+          "chegou",
+          "chegou no",
+          "como",
+          "como acompanhar"
+        ]
+      },
+      "importado_csv": {
+        "examples": 4,
+        "features": [
+          "automático",
+          "automático funciona",
+          "backup",
+          "backup automático",
+          "como",
+          "como configurar",
+          "configurar",
+          "configurar ssl",
+          "funciona",
+          "ssl"
+        ]
+      },
+      "meu_dataset_completo": {
+        "examples": 20,
+        "features": [
+          "app",
+          "automático",
+          "automático funciona",
+          "backup",
+          "backup automático",
+          "backup dos",
+          "benefícios",
+          "benefícios do",
+          "cache",
+          "cache semântico"
+        ]
+      },
+      "meu_negocio_tech": {
+        "examples": 6,
+        "features": [
+          "app",
+          "como",
+          "como precificar",
+          "consultoria",
+          "consultoria em",
+          "custos",
+          "custos de",
+          "de",
+          "de consultoria",
+          "de desenvolvimento"
+        ]
+      },
+      "meu_suporte_personalizado": {
+        "examples": 6,
+        "features": [
+          "backup",
+          "backup dos",
+          "com",
+          "com outras",
+          "como",
+          "como fazer",
+          "dados",
+          "dos",
+          "dos meus",
+          "está"
+        ]
+      },
+      "perguntas_frequentes": {
+        "examples": 4,
+        "features": [
+          "benefícios",
+          "benefícios do",
+          "cache",
+          "cache semântico",
+          "como",
+          "como funciona",
+          "do",
+          "do cache",
+          "funciona",
+          "funciona ia"
+        ]
+      },
+      "saude_digital": {
+        "examples": 10,
+        "features": [
+          "about",
+          "about agendamento",
+          "about consulta",
+          "about prescrição",
+          "about prontuário",
+          "about telemedicina",
+          "agendamento",
+          "agendamento online",
+          "consulta",
+          "consulta virtual"
+        ]
+      },
+      "suporte_tecnico": {
+        "examples": 5,
+        "features": [
+          "500",
+          "api",
+          "api está",
+          "automático",
+          "automático não",
+          "backup",
+          "backup automático",
+          "como",
+          "como configurar",
+          "como otimizar"
+        ]
+      }
+    },
+    "training_timestamp": "2025-08-01T16:03:28.385883"
+  },
+  "usage_instructions": {
+    "python_load": "joblib.load('model.joblib') ou pickle.load(open('model.pkl', 'rb'))",
+    "prediction": "tuner.predict('sua pergunta', top_k=3)",
+    "dependencies": [
+      "scikit-learn",
+      "numpy",
+      "pickle"
+    ]
+  },
+  "integration_example": {
+    "basic_usage": "from src.fine_tuning.real_fine_tuning import SimplifiedFineTuner\ntuner = SimplifiedFineTuner()\ntuner.load_model('exported_model.pkl')\nresults = tuner.predict('Como posso ajudar?')\nprint(results[0]['response'])"
+  }
+}

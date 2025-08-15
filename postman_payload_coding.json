@@ -1,0 +1,11 @@
+{
+    "model": "deepseek-coder:1.3b",
+    "messages": [
+        {
+            "role": "user", 
+            "content": "Crie um código Python que implemente uma classe 'MecanicoRicardo' com um método que retorna dicas de manutenção de motos. A resposta deve ser em português brasileiro."
+        }
+    ],
+    "max_tokens": 200,
+    "temperature": 0.7
+}

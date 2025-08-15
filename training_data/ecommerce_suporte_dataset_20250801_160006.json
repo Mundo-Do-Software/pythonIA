@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "domain": "ecommerce_suporte",
+    "created_at": "2025-08-01T16:00:06.350946",
+    "total_examples": 10,
+    "format_version": "1.0"
+  },
+  "conversations": [
+    {
+      "input": "Como faço para cancelar meu pedido?",
+      "output": "Para cancelar seu pedido: 1) Acesse 'Meus Pedidos' no site, 2) Clique em 'Cancelar' ao lado do pedido desejado, 3) Confirme o cancelamento. Se o pedido já foi enviado, você pode recusá-lo na entrega. Estornos são processados em até 5 dias úteis."
+    },
+    {
+      "input": "Qual o prazo de entrega para São Paulo?",
+      "output": "Para São Paulo capital: Entrega expressa (24h) ou padrão (2-3 dias úteis). Para Grande São Paulo: 2-4 dias úteis. Para interior: 3-7 dias úteis. Você pode acompanhar o rastreamento pelo código enviado por email."
+    },
+    {
+      "input": "Como trocar um produto defeituoso?",
+      "output": "Para trocar produto defeituoso: 1) Acesse 'Trocas e Devoluções', 2) Informe o motivo (defeito), 3) Agende a coleta gratuita, 4) Novo produto será enviado após análise. Processo leva 7-10 dias úteis. Envie fotos do defeito para agilizar."
+    },
+    {
+      "input": "Posso parcelar sem juros?",
+      "output": "Sim! Oferecemos parcelamento sem juros em até 12x no cartão de crédito para compras acima de R$ 200. Para valores menores, até 6x sem juros. No PIX, desconto de 5%. Boleto à vista tem 2% de desconto."
+    },
+    {
+      "input": "O produto não chegou no prazo",
+      "output": "Lamento pelo atraso. Vamos verificar: 1) Confirme seu endereço de entrega, 2) Verifique com portaria/vizinhos, 3) Se confirmado o atraso, ressarcimos o frete ou oferecemos desconto na próxima compra. Prazo máximo é de 15 dias para acionar transportadora."
+    },
+    {
+      "input": "Como alterar o endereço de entrega?",
+      "output": "Para alterar endereço: 1) Se pedido ainda não foi faturado, acesse 'Meus Pedidos' e clique em 'Alterar endereço', 2) Se já foi enviado, entre em contato conosco para tentar interceptar junto à transportadora, 3) Como alternativa, você pode recusar a entrega e repediremos."
+    },
+    {
+      "input": "Qual a política de devolução?",
+      "output": "Nossa política de devolução: 1) Até 7 dias corridos após recebimento (Código de Defesa do Consumidor), 2) Produto deve estar em perfeito estado, 3) Coleta gratuita em todo Brasil, 4) Estorno em até 10 dias úteis. Para produtos personalizados, não aceitamos devolução."
+    },
+    {
+      "input": "Como acompanhar meu pedido?",
+      "output": "Para acompanhar seu pedido: 1) Use o código de rastreamento enviado por email, 2) Acesse 'Meus Pedidos' em sua conta, 3) Consulte diretamente no site dos Correios/transportadora, 4) Receba notificações automáticas por WhatsApp cadastrando seu número."
+    },
+    {
+      "input": "Vocês têm loja física?",
+      "output": "Somos 100% online, o que nos permite oferecer melhores preços. Mas oferecemos: 1) Retirada em pontos parceiros em SP, RJ e BH, 2) Showroom para produtos de alto valor (agende visita), 3) Suporte via chat, email e telefone, 4) Garantia estendida em produtos eletrônicos."
+    },
+    {
+      "input": "O produto está em promoção?",
+      "output": "Verifico para você! Nossas promoções incluem: 1) Liquidações semanais às quartas, 2) Black Friday e Cyber Monday com até 70% off, 3) Cupons exclusivos por email, 4) Cashback para clientes Premium, 5) Desconto progressivo por quantidade. Cadastre-se na newsletter para ofertas exclusivas!"
+    }
+  ]
+}

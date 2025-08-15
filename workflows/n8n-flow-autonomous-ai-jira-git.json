@@ -1,0 +1,93 @@
+{
+  "name": "Autonomous Dev AI Flow",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "jiraVersion": "cloud",
+        "operation": "getAll",
+        "resource": "issue",
+        "additionalFields": {
+          "jql": "project = NEX AND status = \"To Do\" ORDER BY created DESC"
+        }
+      },
+      "id": "1",
+      "name": "Get Jira Task",
+      "type": "n8n-nodes-base.jira",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "your-credential-id",
+          "name": "Jira Cloud"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "git clone https://github.com/eduardorspada/weather-tracking.git && cd weather-tracking && git checkout -b ${{$json[\"fields\"][\"summary\"] | replace(' ', '-')}}"
+      },
+      "id": "2",
+      "name": "Git Clone and Branch",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        500,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "command": "ssh -i /home/node/.ssh/id_rsa user@192.168.0.105 'cd /path/to/project && dotnet restore && dotnet build'"
+      },
+      "id": "3",
+      "name": "Build on VM",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        750,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "command": "cd weather-tracking && gh pr create --title \"${{$json[\"fields\"][\"summary\"]}}\" --body \"Automated by AI\" --base main --head ${{$json[\"fields\"][\"summary\"] | replace(' ', '-')}}"
+      },
+      "id": "4",
+      "name": "Create PR",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Get Jira Task": {
+      "main": [
+        [
+          "Git Clone and Branch"
+        ]
+      ]
+    },
+    "Git Clone and Branch": {
+      "main": [
+        [
+          "Build on VM"
+        ]
+      ]
+    },
+    "Build on VM": {
+      "main": [
+        [
+          "Create PR"
+        ]
+      ]
+    }
+  },
+  "active": false
+}

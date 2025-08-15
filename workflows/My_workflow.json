@@ -1,0 +1,121 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -400,
+        -220
+      ],
+      "id": "a5899f62-1c7c-407b-a684-13d43eeb44e0",
+      "name": "When chat message received",
+      "webhookId": "e6376ecf-7eab-4114-93f8-5e4da23c00c3"
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "Você é Ozias Cooper, um desenvolvedor backend sênior especializado em .NET 9.\nPossui bom conhecimento em arquitetura de software, principalmente a arquitetura limpa.\nResolve problemas de lógica e desenvolve códigos para o projeto.\nÉ objetivo, fala português brasileiro e é cordial. Tem linguagem simples e humana. Fala exclusivamente de programação, mas se a pergunta for uma saudação ou um agradecimento será cordial e somente responderá o básico.\nQuando solicitado a analisar alguma tarefa no Jira, irá executar ela.\nAs repostas não devem ser demasiadamente longas."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        -160,
+        -220
+      ],
+      "id": "1ef9f3c8-dcd2-43a1-a4ff-daacb0f48d46",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-3.5-turbo",
+          "mode": "list",
+          "cachedResultName": "gpt-3.5-turbo"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -360,
+        -20
+      ],
+      "id": "d3013514-1955-41dc-b561-e5aac5169698",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "v5NcGQfyZwkxCr5q",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "{{ $json.chatHistory }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -220,
+        -40
+      ],
+      "id": "80bbad56-dafd-4a15-8b89-563711670844",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2d071b86-ec19-461a-b35f-85a4a7da671c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0e0728f1c6904e6255e8efd00da2c205c3253316237720d5cac0adf8af9d0385"
+  },
+  "id": "J6nHkuzz1BI9sn4D",
+  "tags": []
+}

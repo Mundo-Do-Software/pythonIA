@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "domain": "meu_dataset_completo",
+    "created_at": "2025-08-01T14:40:36.403417",
+    "total_examples": 10,
+    "format_version": "1.0"
+  },
+  "conversations": [
+    {
+      "input": "Quais são os custos de desenvolvimento de um app?",
+      "output": "Os custos de desenvolvimento de app variam de R$ 10.000 a R$ 500.000, dependendo da complexidade. Apps simples custam R$ 10-50k, médios R$ 50-150k, e complexos R$ 150k+. Fatores incluem plataformas (iOS/Android), funcionalidades, design e manutenção."
+    },
+    {
+      "input": "Como precificar serviços de consultoria em TI?",
+      "output": "Para precificar consultoria em TI: 1) Calcule seus custos (salário, impostos, infraestrutura), 2) Defina margem de lucro (30-50%), 3) Pesquise mercado (R$ 100-300/hora), 4) Considere valor entregue, 5) Ofereça pacotes mensais para recorrência."
+    },
+    {
+      "input": "Qual o melhor modelo de negócio para SaaS?",
+      "output": "Para SaaS, modelos eficazes incluem: 1) Freemium (gratuito + premium), 2) Assinatura mensal/anual, 3) Por usuário/funcionalidade, 4) Híbrido. Foque em LTV > CAC, churn baixo (<5% mensal), e crescimento recorrente. Teste diferentes preços com A/B testing."
+    },
+    {
+      "input": "O sistema está lento, o que fazer?",
+      "output": "Para resolver lentidão: 1) Verifique conexão internet, 2) Feche abas/programas desnecessários, 3) Limpe cache do navegador, 4) Reinicie o sistema, 5) Se persistir, entre em contato informando: SO, navegador, e passos reproduzir o problema."
+    },
+    {
+      "input": "Como fazer backup dos meus dados?",
+      "output": "Para backup seguro: 1) Acesse Configurações > Backup, 2) Selecione dados para salvar, 3) Escolha local (nuvem/local), 4) Configure frequência automática, 5) Teste restauração mensalmente. Recomendamos backup diário automático para nuvem."
+    },
+    {
+      "input": "Posso integrar com outras ferramentas?",
+      "output": "Sim! Oferecemos integrações com: Slack, Teams, Zapier, Google Workspace, Office 365. Acesse Integrações no menu, escolha a ferramenta, siga o wizard de configuração. Para integrações personalizadas, consulte nossa API em docs.empresa.com/api."
+    },
+    {
+      "input": "Como funciona a IA no nosso sistema?",
+      "output": "Nossa IA usa modelos de linguagem avançados para entender contexto e gerar respostas precisas. Combinamos cache semântico para velocidade com fine-tuning contínuo para melhorar a qualidade das respostas baseada no uso real.",
+      "context": "Sistema de IA empresarial"
+    },
+    {
+      "input": "Quais são os benefícios do cache semântico?",
+      "output": "O cache semântico oferece: 1) Velocidade 800x+ maior, 2) Redução de custos computacionais, 3) Respostas consistentes para perguntas similares, 4) Melhoria contínua da experiência do usuário.",
+      "context": "Performance e otimização"
+    },
+    {
+      "input": "Como configurar SSL?",
+      "output": "Para SSL: 1) Obtenha certificado, 2) Configure servidor, 3) Teste conexão HTTPS",
+      "categoria": "seguranca"
+    },
+    {
+      "input": "Backup automático funciona?",
+      "output": "Sim, backup automático roda diariamente às 2h. Verifique logs em /var/log/backup.log",
+      "categoria": "backup"
+    }
+  ]
+}

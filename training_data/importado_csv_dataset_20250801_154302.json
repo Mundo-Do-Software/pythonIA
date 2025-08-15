@@ -1,0 +1,20 @@
+{
+  "metadata": {
+    "domain": "importado_csv",
+    "created_at": "2025-08-01T15:43:02.300998",
+    "total_examples": 2,
+    "format_version": "1.0"
+  },
+  "conversations": [
+    {
+      "input": "Como configurar SSL?",
+      "output": "Para SSL: 1) Obtenha certificado, 2) Configure servidor, 3) Teste conexão HTTPS",
+      "categoria": "seguranca"
+    },
+    {
+      "input": "Backup automático funciona?",
+      "output": "Sim, backup automático roda diariamente às 2h. Verifique logs em /var/log/backup.log",
+      "categoria": "backup"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "domain": "meu_negocio_tech",
+    "created_at": "2025-08-01T15:43:02.278131",
+    "total_examples": 3,
+    "format_version": "1.0"
+  },
+  "conversations": [
+    {
+      "input": "Quais são os custos de desenvolvimento de um app?",
+      "output": "Os custos de desenvolvimento de app variam de R$ 10.000 a R$ 500.000, dependendo da complexidade. Apps simples custam R$ 10-50k, médios R$ 50-150k, e complexos R$ 150k+. Fatores incluem plataformas (iOS/Android), funcionalidades, design e manutenção."
+    },
+    {
+      "input": "Como precificar serviços de consultoria em TI?",
+      "output": "Para precificar consultoria em TI: 1) Calcule seus custos (salário, impostos, infraestrutura), 2) Defina margem de lucro (30-50%), 3) Pesquise mercado (R$ 100-300/hora), 4) Considere valor entregue, 5) Ofereça pacotes mensais para recorrência."
+    },
+    {
+      "input": "Qual o melhor modelo de negócio para SaaS?",
+      "output": "Para SaaS, modelos eficazes incluem: 1) Freemium (gratuito + premium), 2) Assinatura mensal/anual, 3) Por usuário/funcionalidade, 4) Híbrido. Foque em LTV > CAC, churn baixo (<5% mensal), e crescimento recorrente. Teste diferentes preços com A/B testing."
+    }
+  ]
+}

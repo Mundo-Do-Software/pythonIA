@@ -1,0 +1,96 @@
+# Docker Compose otimizado para RTX 2060 Local
+version: '3.8'
+
+services:
+  # Ollama otimizado para RTX 2060
+  ollama-local:
+    image: ollama/ollama:latest
+    container_name: ollama-rtx2060
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./models:/root/.ollama/models
+      - ollama_data:/root/.ollama
+    environment:
+      # Otimizações específicas para RTX 2060 (6GB VRAM)
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_GPU_LAYERS=35        # Otimizado para 6GB VRAM
+      - OLLAMA_NUM_PARALLEL=1       # Apenas 1 para economia VRAM
+      - OLLAMA_MAX_LOADED_MODELS=1  # Um modelo por vez
+      - OLLAMA_FLASH_ATTENTION=1    # Economia de memória
+      - OLLAMA_CONTEXT_LENGTH=2048  # Contexto otimizado
+      - OLLAMA_MAX_QUEUE=128        # Fila reduzida
+      - CUDA_VISIBLE_DEVICES=0      # Usar primeira GPU
+      # Otimizações de memória CUDA
+      - PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512,garbage_collection_threshold:0.6
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    networks:
+      - llm-local
+
+  # API Server otimizado para teste local
+  llm-api-local:
+    build:
+      context: .
+      dockerfile: config/Dockerfile.local
+    container_name: llm-api-rtx2060
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - API_KEY=test-local-key
+      - REDIS_URL=redis://redis-local:6379
+      - OLLAMA_URL=http://ollama-local:11434
+      - ENVIRONMENT=local-rtx2060
+      # Configurações econômicas
+      - MAX_CONCURRENT_REQUESTS=1   # Apenas 1 por vez
+      - CACHE_TTL=600               # Cache por 10 min
+      - MAX_TOKENS_DEFAULT=256      # Tokens limitados
+    depends_on:
+      - ollama-local
+      - redis-local
+    networks:
+      - llm-local
+
+  # Redis leve para cache local
+  redis-local:
+    image: redis:7-alpine
+    container_name: redis-rtx2060
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_local_data:/data
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    networks:
+      - llm-local
+
+  # Monitor de recursos local
+  resource-monitor:
+    image: prom/prometheus:latest
+    container_name: monitor-rtx2060
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus-local.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - llm-local
+    profiles: ["monitoring"]  # Opcional
+
+networks:
+  llm-local:
+    driver: bridge
+    name: llm-rtx2060-network
+
+volumes:
+  ollama_data:
+    name: ollama-rtx2060-data
+  redis_local_data:
+    name: redis-rtx2060-data
